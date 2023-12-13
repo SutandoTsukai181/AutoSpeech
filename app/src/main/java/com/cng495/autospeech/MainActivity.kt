@@ -1,6 +1,10 @@
 package com.cng495.autospeech
 
+import android.content.Context
+import android.net.ConnectivityManager
+import android.net.NetworkInfo
 import android.os.Bundle
+import android.os.StrictMode
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
@@ -11,13 +15,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.cng495.autospeech.ui.theme.AutoSpeechTheme
-import com.google.cloud.translate.v3.LocationName
-import com.google.cloud.translate.v3.TranslateTextRequest
-import com.google.cloud.translate.v3.TranslateTextResponse
-import com.google.cloud.translate.v3.TranslationServiceClient
+import com.google.auth.oauth2.GoogleCredentials
+import com.google.cloud.translate.Translate
+import com.google.cloud.translate.TranslateOptions
+import java.io.IOException
 
 
 class MainActivity : ComponentActivity() {
+
+    private var translate: Translate? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -25,28 +32,17 @@ class MainActivity : ComponentActivity() {
             //Do some Network Request
 
             try {
-                var project_id = "apt-impact-407816"
+                if (checkInternetConnection()) {
+                    println("Connected")
 
-                var client = TranslationServiceClient.create()
-                var parent = LocationName.of(project_id, "global")
+                    //If there is internet connection, get translate service and start translation:
+                    getTranslateService()
+                    translate()
 
-                val request = TranslateTextRequest.newBuilder()
-                    .setParent(parent.toString())
-                    .setMimeType("text/plain")
-                    .setTargetLanguageCode("tr")
-                    .addContents("Hello world")
-                    .build()
-
-                val response: TranslateTextResponse = client.translateText(request)
-
-                for (x in response.translationsList) {
-                    println(x.translatedText)
+                } else {
+                    println("No internet")
                 }
 
-                // v2
-//                var tr = TranslateOptions.newBuilder().setProjectId(project_id).build().service
-//                var result = tr.translate("Hello world")
-//                print(result.translatedText)
             } catch (e: Exception) {
                 print(e)
             }
@@ -69,6 +65,47 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
+    }
+
+    private fun getTranslateService() {
+
+        val policy = StrictMode.ThreadPolicy.Builder().permitAll().build()
+        StrictMode.setThreadPolicy(policy)
+
+        try {
+            resources.openRawResource(R.raw.credentials).use { `is` ->
+                val myCredentials = GoogleCredentials.fromStream(`is`)
+                val translateOptions = TranslateOptions.newBuilder().setCredentials(myCredentials).build()
+                translate = translateOptions.service
+            }
+        } catch (ioe: IOException) {
+            ioe.printStackTrace()
+
+        }
+
+    }
+
+    private fun translate() {
+
+        //Get input text to be translated:
+        val originalText: String = "Hello World"
+        val translation = translate!!.translate(originalText, Translate.TranslateOption.targetLanguage("tr"), Translate.TranslateOption.model("base"))
+
+        //Translated text and original text are set to TextViews:
+        val translated = translation.translatedText
+
+        println(translated)
+    }
+
+    private fun checkInternetConnection(): Boolean {
+
+        //Check internet connection:
+        val connectivityManager = this.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val activeNetwork: NetworkInfo? = connectivityManager.activeNetworkInfo
+
+        //Means that we are connected to a network (mobile or wi-fi)
+        return activeNetwork?.isConnected == true
+
     }
 }
 
