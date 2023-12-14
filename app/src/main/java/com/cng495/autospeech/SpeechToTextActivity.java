@@ -21,7 +21,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class SpeechToTextActivity extends AppCompatActivity {
+public class SpeechToTextActivity extends Activity {
 
     public static final Integer RecordAudioRequestCode = 1;
 

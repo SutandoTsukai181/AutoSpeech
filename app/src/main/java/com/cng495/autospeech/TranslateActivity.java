@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.app.Activity;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.text.Editable;
@@ -30,7 +31,7 @@ import java.util.TimerTask;
 
 import javax.annotation.Nullable;
 
-public class TranslateActivity extends AppCompatActivity {
+public class TranslateActivity extends Activity {
 
     EditText textInput;
     TextView detectedLanguage ;
