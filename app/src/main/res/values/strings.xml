@@ -6,5 +6,5 @@
     <string name="speak_button_text">Speak</string>
     <string name="text_to_translate_hint">Enter the text to translate</string>
     <string name="no_connection">Please Connect To Internet</string>
-    <string name="language_detection_error">Internal Error Occured.</string>
+    <string name="language_detection_error">Internal Error Occurred.</string>
 </resources>

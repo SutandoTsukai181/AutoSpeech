@@ -38,6 +38,12 @@ class MainActivity : ComponentActivity() {
             startActivity(intent)
         }
 
+        val button2Click = findViewById<Button>(R.id.translate_button)
+        button2Click.setOnClickListener {
+            val intent = Intent(this, TranslateActivity::class.java)
+            startActivity(intent)
+        }
+
         Thread {
             //Do some Network Request
 
@@ -59,9 +65,9 @@ class MainActivity : ComponentActivity() {
 
             print("next!")
 
-            runOnUiThread({
+            runOnUiThread{
                 //Update UI
-            })
+            }
         }.start()
 
         /*
