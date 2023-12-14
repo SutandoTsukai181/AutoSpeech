@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
     <application
         android:allowBackup="true"
@@ -16,8 +17,9 @@
         android:theme="@style/Theme.AutoSpeech"
         tools:targetApi="31">
         <activity
-            android:name=".SpeechToTextActivity"
+            android:name=".TranslateActivity"
             android:exported="false" />
+        <activity android:name=".SpeechToTextActivity"></activity>
         <activity
             android:name=".MainActivity"
             android:exported="true"

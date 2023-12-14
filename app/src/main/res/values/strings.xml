@@ -4,4 +4,5 @@
     <string name="title_activity_speech_to_translate">SpeechToTranslate</string>
     <string name="hello_blank_fragment">Speech to Text</string>
     <string name="speak_button_text">Speak</string>
+    <string name="text_to_translate_hint">Enter the text to translate</string>
 </resources>
