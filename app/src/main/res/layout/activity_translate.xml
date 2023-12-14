@@ -1,28 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".TranslateActivity">
+    android:layout_height="match_parent">
 
-
-    <com.google.android.material.textfield.TextInputEditText
+    <EditText
         android:id="@+id/text_to_translate_input"
         android:layout_width="match_parent"
         android:layout_height="116dp"
         android:hint="@string/text_to_translate_hint"
-        android:textSize="20sp" />
+        android:inputType="text"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/detected_language"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.243"
+        tools:layout_editor_absoluteX="0dp" />
 
     <TextView
         android:id="@+id/detected_language"
         android:layout_width="match_parent"
-        android:layout_height="75dp" />
+        android:layout_height="75dp"
+        android:layout_marginBottom="104dp"
+        app:layout_constraintBottom_toTopOf="@+id/translated_text_view"
+        tools:layout_editor_absoluteX="0dp" />
 
     <TextView
         android:id="@+id/translated_text_view"
         android:layout_width="match_parent"
-        android:layout_height="81dp" />
+        android:layout_height="81dp"
+        android:layout_marginBottom="264dp"
+        android:text="Test"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="16dp" />
 
-</LinearLayout>
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="92dp"
+        android:text="Button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/translated_text_view"
+        app:layout_constraintVertical_bias="0.024" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
