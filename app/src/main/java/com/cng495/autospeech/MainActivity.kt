@@ -1,10 +1,12 @@
 package com.cng495.autospeech
 
 import android.content.Context
+import android.content.Intent
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
 import android.os.Bundle
 import android.os.StrictMode
+import android.widget.Button
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
@@ -27,6 +29,14 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+
+        val buttonClick = findViewById<Button>(R.id.speech_to_text_button)
+        buttonClick.setOnClickListener {
+            val intent = Intent(this, SpeechToTextActivity::class.java)
+            startActivity(intent)
+        }
 
         Thread {
             //Do some Network Request
@@ -54,6 +64,7 @@ class MainActivity : ComponentActivity() {
             })
         }.start()
 
+        /*
         setContent {
             AutoSpeechTheme {
                 // A surface container using the 'background' color from the theme
@@ -65,6 +76,8 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
+
+         */
     }
 
     private fun getTranslateService() {
