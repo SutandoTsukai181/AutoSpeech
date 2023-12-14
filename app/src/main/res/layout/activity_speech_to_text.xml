@@ -25,11 +25,11 @@
     <Button
         android:id="@+id/speakButton"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="115dp"
+        android:text="@string/speak_button_text"
         app:icon="@drawable/speak_icon_foreground"
         app:iconGravity="textStart"
-        app:iconSize="32dp"
-        tools:text="@string/speak_button_text" />
+        app:iconSize="32dp" />
 
     <TextView
         android:id="@+id/translateTextView"
