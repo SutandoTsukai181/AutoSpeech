@@ -10,21 +10,24 @@
 
     <EditText
         android:id="@+id/text_to_translate_input"
-        android:inputType="text"
         android:layout_width="match_parent"
         android:layout_height="116dp"
+        android:layout_margin="20dp"
         android:hint="@string/text_to_translate_hint"
+        android:inputType="text"
         android:textSize="20sp" />
 
     <TextView
         android:id="@+id/detected_language"
         android:layout_width="match_parent"
-        android:layout_height="75dp" />
+        android:layout_height="75dp"
+        android:layout_margin="20dp" />
 
     <TextView
         android:id="@+id/translated_text_view"
         android:layout_width="match_parent"
         android:layout_height="81dp"
+        android:layout_margin="20dp"
         android:text="Test" />
 
 </LinearLayout>
